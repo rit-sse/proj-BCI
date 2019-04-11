@@ -49,6 +49,16 @@ class App extends Component {
     return 0;
   };
 
+  getAverageAlpha = _ => {
+    const { data } = this.state;
+
+    if (data.alpha) {
+      return data.alpha.reduce((sum, x) => sum + x) / data.alpha.length;
+    }
+
+    return 0;
+  };
+
   renderVisualization = _ => {
     const { data } = this.state;
     document.body.style = 'background: white; color: black;';
@@ -89,11 +99,19 @@ class App extends Component {
     return <HackerTyper data={data} speed={this.getAverageGamma()} />;
   };
 
+  renderFidgetSpinner = _ => {
+    const { data } = this.state;
+    document.body.style = 'background: black;';
+    return <FidgetSpinner data={data} speed={this.getAverageAlpha()} />;
+  };
+
   renderDemoType = _ => {
     const { demoType } = this.state;
     switch (demoType) {
       case 'hackertyper':
         return this.renderHackerTyper();
+      case 'fidgetspinner':
+        return this.renderFidgetSpinner();
       default:
         return this.renderVisualization();
     }
@@ -119,6 +137,7 @@ class App extends Component {
         <select value={demoType} onChange={this.handleDemoTypeChange}>
           <option value="visualization">Visualization</option>
           <option value="hackertyper">Hacker Typer</option>
+          <option value="fidgetspinner">Fidget Spinner</option>
         </select>
         {this.renderDemoType()}
       </div>
