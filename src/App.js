@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { zipSamples, MuseClient } from 'muse-js';
 import { powerByBand, epoch, fft } from '@neurosity/pipes';
-import 'react-toggle/style.css'; // for ES6 modules
 import Visualization from './Visualization';
 import HackerTyper from './HackerTyper';
 
