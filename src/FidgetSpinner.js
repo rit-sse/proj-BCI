@@ -1,49 +1,41 @@
 import React from 'react';
+import styled, { css, keyframes } from 'styled-components'
 import img from './spinner.png';
+
+const rotate = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+`;
+const animation = props =>
+  css`
+    ${rotate} ${props.speed}s infinite alternate;
+  `
+
+  const Rotate = styled.div`
+  display: inline-block;
+  animation: ${animation};
+  padding: 2rem 1rem;
+  font-size: 1.2rem;
+`;  
 
 class FidgetSpinner extends React.Component{
 
-    constructor(props){
-        super(props);
-        this.spinValue = new Animated.Value(0);
-    }
+  constructor(props){
+      super(props);
+  };
 
-    spin () {
-        const { speed } = this.props;
-
-        this.spinValue.setValue(0)
-        Animated.timing(
-          this.spinValue,
-          {
-            toValue: 1,
-            easing: Easing.linear,
-    
-          }
-        ).start(() => this.spin())
-      }
-    
-    componentDidMount () {
-        this.spin();
-      }
-
-    render() {
-        const spin = this.spinValue.interpolate({
-            inputRange: [0, 1],
-            outputRange: ['0deg', '360deg']
-        })
-
-        return(
-            <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
-            <Animated.Image
-            style={{
-              width: 400,
-              height: 400,
-              transform: [{rotate: spin}] }}
-              source={{uri: img}}
-          />
-          </View>    
-        );
-      }
-}
+    render(){
+      return(
+        <div>
+          <Rotate> <img src={img}/> </Rotate>
+        </div>
+      )
+    };
+};
 
 export default FidgetSpinner;
