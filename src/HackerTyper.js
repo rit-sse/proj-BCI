@@ -12,7 +12,7 @@ class HackerTyper extends React.Component {
 
   updateText = e => {
     const { text, fullText, textIdx } = this.state;
-    const { speed } = this.props ;
+    const { speed } = this.props;
 
     this.setState(
       {
