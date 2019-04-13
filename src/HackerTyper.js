@@ -29,14 +29,14 @@ class HackerTyper extends React.Component {
     fetch(file)
       .then(r => r.text())
       .then(text => this.setState({ fullText: text.split('') }));
-    document.addEventListener('keypress', this.updateText, false);
-    //this.interval = setInterval(this.updateText, 100);
+    // document.addEventListener('keypress', this.updateText, false);
+    this.interval = setInterval(this.updateText, 100);
     document.body.style = 'background: black;';
   }
 
   componentWillUnmount() {
-    document.removeEventListener('keypress', this.updateText, false);
-    //clearInterval(this.interval);
+    // document.removeEventListener('keypress', this.updateText, false);
+    clearInterval(this.interval);
   }
 
   render() {

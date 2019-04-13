@@ -3,6 +3,7 @@ import { zipSamples, MuseClient } from 'muse-js';
 import { powerByBand, epoch, fft } from '@neurosity/pipes';
 import Visualization from './Visualization';
 import HackerTyper from './HackerTyper';
+import FidgetSpinner from './FidgetSpinner';
 
 class App extends Component {
   state = {
@@ -42,7 +43,19 @@ class App extends Component {
     const { data } = this.state;
 
     if (data.gamma) {
-      return data.gamma.reduce((sum, x) => sum + x) / data.gamma.length;
+      const focus = data.gamma.reduce((sum, x) => sum + x) / data.gamma.length
+      return 5 - focus > 0 ? 5 - focus : 0;
+
+    }
+
+    return 0;
+  };
+
+  getAverageAlpha = _ => {
+    const { data } = this.state;
+
+    if (data.alpha) {
+      return 1 / (data.alpha.reduce((sum, x) => sum + x) / data.alpha.length);
     }
 
     return 0;
@@ -88,11 +101,19 @@ class App extends Component {
     return <HackerTyper data={data} speed={this.getAverageGamma()} />;
   };
 
+  renderFidgetSpinner = _ => {
+    const { data } = this.state;
+    document.body.style = 'background: black;';
+    return <FidgetSpinner data={data} speed={this.getAverageAlpha()} />;
+  };
+
   renderDemoType = _ => {
     const { demoType } = this.state;
     switch (demoType) {
       case 'hackertyper':
         return this.renderHackerTyper();
+      case 'fidgetspinner':
+        return this.renderFidgetSpinner();
       default:
         return this.renderVisualization();
     }
@@ -118,6 +139,7 @@ class App extends Component {
         <select value={demoType} onChange={this.handleDemoTypeChange}>
           <option value="visualization">Visualization</option>
           <option value="hackertyper">Hacker Typer</option>
+          <option value="fidgetspinner">Fidget Spinner</option>
         </select>
         {this.renderDemoType()}
       </div>
