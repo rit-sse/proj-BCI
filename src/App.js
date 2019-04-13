@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { zipSamples, MuseClient } from 'muse-js';
 import { powerByBand, epoch, fft } from '@neurosity/pipes';
-//  
 import Visualization from './Visualization';
 import HackerTyper from './HackerTyper';
 import FidgetSpinner from './FidgetSpinner';
@@ -56,7 +55,7 @@ class App extends Component {
     const { data } = this.state;
 
     if (data.alpha) {
-      return data.alpha.reduce((sum, x) => sum + x) / data.alpha.length;
+      return 1 / (data.alpha.reduce((sum, x) => sum + x) / data.alpha.length);
     }
 
     return 0;
