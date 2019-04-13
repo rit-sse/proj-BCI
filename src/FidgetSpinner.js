@@ -14,12 +14,13 @@ const rotate = keyframes`
 const animation = props =>
   css`
     ${rotate} ${props.speed}s linear infinite;
-  `;
-  const Rotate = styled.div`
-    display: inline-block;
-    animation: ${props => animation(props)};
-    padding: 2rem 1rem;
-    font-size: 1.2rem;
+`;
+
+const Rotate = styled.div`
+  display: inline-block;
+  animation: ${props => animation(props)};
+  padding: 2rem 1rem;
+  font-size: 1.2rem;
 `;  
 
 class FidgetSpinner extends React.Component{

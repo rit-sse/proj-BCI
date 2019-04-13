@@ -4,6 +4,7 @@ import { powerByBand, epoch, fft } from '@neurosity/pipes';
 import Visualization from './Visualization';
 import HackerTyper from './HackerTyper';
 import FidgetSpinner from './FidgetSpinner';
+import RockPaperScissors from './RockPaperScissors';
 
 class App extends Component {
   state = {
@@ -43,9 +44,19 @@ class App extends Component {
     const { data } = this.state;
 
     if (data.gamma) {
-      const focus = data.gamma.reduce((sum, x) => sum + x) / data.gamma.length
-      return 5 - focus > 0 ? 5 - focus : 0;
+      const focus = data.gamma.reduce((sum, x) => sum + x) / data.gamma.length;
+      return 10 - focus > 0 ? 10 - focus : 0;
 
+    }
+
+    return 0;
+  };
+
+  getInverseAverageAlpha = _ => {
+    const { data } = this.state;
+
+    if (data.alpha) {
+      return 1 / (data.alpha.reduce((sum, x) => sum + x) / data.alpha.length);
     }
 
     return 0;
@@ -55,9 +66,26 @@ class App extends Component {
     const { data } = this.state;
 
     if (data.alpha) {
-      return 1 / (data.alpha.reduce((sum, x) => sum + x) / data.alpha.length);
+      return data.alpha.reduce((sum, x) => sum + x) / data.alpha.length;
     }
+    return 0;
+  };
 
+  getAverageTheta = _ => {
+    const { data } = this.state;
+
+    if (data.theta) {
+      return data.theta.reduce((sum, x) => sum + x) / data.theta.length;
+    }
+    return 0;
+  };
+
+  getAverageDelta = _ => {
+    const { data } = this.state;
+
+    if (data.delta) {
+      return data.delta.reduce((sum, x) => sum + x) / data.delta.length;
+    }
     return 0;
   };
 
@@ -104,8 +132,14 @@ class App extends Component {
   renderFidgetSpinner = _ => {
     const { data } = this.state;
     document.body.style = 'background: black;';
-    return <FidgetSpinner data={data} speed={this.getAverageAlpha()} />;
+    return <FidgetSpinner data={data} speed={this.getInverseAverageAlpha()} />;
   };
+
+  renderRockPaperScissors = _ => {
+    const { data } = this.state;
+    document.body.style ='width:40rem;border:2px solid #088;margin:1rem auto;display:flex;justify-content:space-evenly;';
+    return <RockPaperScissors data={data} alpha={this.getAverageAlpha} theta={this.getAverageTheta} delta={this.getAverageDelta}/>;
+  }
 
   renderDemoType = _ => {
     const { demoType } = this.state;
@@ -114,6 +148,8 @@ class App extends Component {
         return this.renderHackerTyper();
       case 'fidgetspinner':
         return this.renderFidgetSpinner();
+      case 'rockpaperscissors':
+        return this.renderRockPaperScissors();
       default:
         return this.renderVisualization();
     }
@@ -140,6 +176,7 @@ class App extends Component {
           <option value="visualization">Visualization</option>
           <option value="hackertyper">Hacker Typer</option>
           <option value="fidgetspinner">Fidget Spinner</option>
+          <option value="rockpaperscissors">Rock Paper Scissors</option>
         </select>
         {this.renderDemoType()}
       </div>
