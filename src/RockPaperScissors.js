@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import './rockPaperScissors.css';
+import './asset/stylesheet/rockPaperScissors.css';
 
 let counter = 0;
 
 const PlayerCard = ({color, symbol})=> {
     const style = {
         backgroundColor: color,
+        backgroundImage: "url(./" + symbol + ".png)"
     }
     return(
         <div style = {style} className="player-card">
@@ -57,7 +58,7 @@ class RockPaperScissors extends Component {
                 playerBlue: this.symbols[Math.floor(Math.random()*3)],
                 winner:""
             })
-        },40)
+        }, 40)
     }
 
     componentWillUnmount() {
@@ -65,7 +66,6 @@ class RockPaperScissors extends Component {
             clearInterval(this.interval)
             this.setState({winner:this.decideWinner()})
         }
-        console.log(counter)
     }
 
     render() {

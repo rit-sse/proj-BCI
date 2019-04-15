@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css, keyframes } from 'styled-components'
-import img from './spinner.png';
+import img from './asset/image/spinner.png';
 
 const rotate = keyframes`
   from {
