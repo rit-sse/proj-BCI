@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { zipSamples, MuseClient } from 'muse-js';
 import { powerByBand, epoch, fft } from '@neurosity/pipes';
+import { Navbar, NavItem } from 'react-materialize';
 import Visualization from './Visualization';
 import HackerTyper from './HackerTyper';
 import FidgetSpinner from './FidgetSpinner';
@@ -136,11 +137,36 @@ class App extends Component {
         </button>
         <div>Status: {statusText}</div>
         <p>Battery: {batteryLevel}%</p>
-        <select value={demoType} onChange={this.handleDemoTypeChange}>
-          <option value="visualization">Visualization</option>
-          <option value="hackertyper">Hacker Typer</option>
-          <option value="fidgetspinner">Fidget Spinner</option>
-        </select>
+        <Navbar brand={<a />} alignLinks="left">
+          <NavItem value="visualization" onClick={this.handleDemoTypeChange}>
+            Visualization
+          </NavItem>
+          <NavItem value="hackertyper" onClick={this.handleDemoTypeChange}>
+            Hacker Typer
+          </NavItem>
+          <NavItem value="fidgetspinner" onClick={this.handleDemoTypeChange}>
+            Fidget Spinner
+          </NavItem>
+          <NavItem value="othergame" onClick={this.handleDemoTypeChange}>
+            Other Game
+          </NavItem>
+        </Navbar>
+        {/* <div class="nav-wrapper">
+          <nav>
+            <a href="#!" class="brand-logo center">Logo</a>
+            <ul class="left hide-on-med-and-down">
+              <li class={this.state.demoType === "HackerTyper" ? "active" : ""}>
+                <a value="HackerTyper" onClick={this.handleDemoTypeChange}>Hacker Typer</a>
+              </li>
+              <li class={this.state.demoType === "FidgetSpinner" ? "active" : ""}>
+                <a value="FidgetSpinner" onClick={this.handleDemoTypeChange}>Fidget Spinner</a>
+              </li>
+              <li class={this.state.demoType === "OtherGame" ? "active" : ""}>
+                <a value="OtherGame" onClick={this.handleDemoTypeChange}>Other Game</a>
+              </li>
+            </ul>
+          </nav>
+        </div> */}
         {this.renderDemoType()}
       </div>
     );
