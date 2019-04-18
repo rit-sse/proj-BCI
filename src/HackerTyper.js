@@ -14,10 +14,18 @@ class HackerTyper extends React.Component {
     const { text, fullText, textIdx } = this.state;
     const { speed } = this.props;
 
+    let currentText = text;
+    let textLength = textIdx;
+
+    if(text.substring(text.length-1,text.length)==="|") { // if last char is the cursor
+      currentText = text.substring(0,text.length-1); // remove it
+      textLength = textIdx - 1;
+    }
+
     this.setState(
       {
-        text: text + fullText.slice(textIdx, textIdx + speed).join(''),
-        textIdx: textIdx + speed
+        text: currentText + fullText.slice(textLength, textLength + speed).join(''),
+        textIdx: textLength + speed
       },
       scroll.scrollToBottom({ duration: 0 })
     );
@@ -25,18 +33,40 @@ class HackerTyper extends React.Component {
     document.title = `Speed: ${speed}`;
   };
 
+  blinkCursor = e => { // blinking cursor
+    const { text, fullText, textIdx } = this.state; // get console
+    let currentText = text;
+    let textLength = textIdx;
+		if(text.substring(text.length-1,text.length)==="|") { // if last char is the cursor
+      currentText = text.substring(0,text.length-1); // remove it
+      textLength = textIdx - 1;
+    } else {
+      currentText = text + "|"; // else write it
+      textLength = textIdx + 1;
+    }
+    this.setState(
+      {
+        text: currentText,
+        textIdx: textLength
+      },
+      scroll.scrollToBottom({ duration: 0 })
+    );
+	}
+
   componentDidMount() {
     fetch(file)
       .then(r => r.text())
       .then(text => this.setState({ fullText: text.split('') }));
-    // document.addEventListener('keypress', this.updateText, false);
+    document.addEventListener('keypress', this.updateText, false);
     this.interval = setInterval(this.updateText, 100);
+    this.cursor = setInterval(this.blinkCursor, 500);
     document.body.style = 'background: black;';
   }
 
   componentWillUnmount() {
-    // document.removeEventListener('keypress', this.updateText, false);
+    document.removeEventListener('keypress', this.updateText, false);
     clearInterval(this.interval);
+    clearInterval(this.cursor);
   }
 
   render() {
