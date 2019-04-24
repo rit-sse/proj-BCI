@@ -34,6 +34,7 @@ class HackerTyper extends React.Component {
   };
 
   blinkCursor = e => { // blinking cursor
+    // eslint-disable-next-line
     const { text, fullText, textIdx } = this.state; // get console
     let currentText = text;
     let textLength = textIdx;

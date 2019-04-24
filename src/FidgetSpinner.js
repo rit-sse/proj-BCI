@@ -26,14 +26,10 @@ const animation = props =>
 
 class FidgetSpinner extends React.Component{
 
-  constructor(props){
-      super(props);
-  };
-
     render(){
       return(
         <div>
-          <Rotate speed = {this.props.speed}> <img src={img}/> </Rotate>
+          <Rotate speed = {this.props.speed}> <img alt="Fidget Spinner" src={img}/> </Rotate>
         </div>
       )
     };
