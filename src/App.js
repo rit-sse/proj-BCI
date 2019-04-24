@@ -151,22 +151,6 @@ class App extends Component {
             Other Game
           </NavItem>
         </Navbar>
-        {/* <div class="nav-wrapper">
-          <nav>
-            <a href="#!" class="brand-logo center">Logo</a>
-            <ul class="left hide-on-med-and-down">
-              <li class={this.state.demoType === "HackerTyper" ? "active" : ""}>
-                <a value="HackerTyper" onClick={this.handleDemoTypeChange}>Hacker Typer</a>
-              </li>
-              <li class={this.state.demoType === "FidgetSpinner" ? "active" : ""}>
-                <a value="FidgetSpinner" onClick={this.handleDemoTypeChange}>Fidget Spinner</a>
-              </li>
-              <li class={this.state.demoType === "OtherGame" ? "active" : ""}>
-                <a value="OtherGame" onClick={this.handleDemoTypeChange}>Other Game</a>
-              </li>
-            </ul>
-          </nav>
-        </div> */}
         {this.renderDemoType()}
       </div>
     );
