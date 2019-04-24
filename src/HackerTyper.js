@@ -17,14 +17,16 @@ class HackerTyper extends React.Component {
     let currentText = text;
     let textLength = textIdx;
 
-    if(text.substring(text.length-1,text.length)==="|") { // if last char is the cursor
-      currentText = text.substring(0,text.length-1); // remove it
+    if (text.substring(text.length - 1, text.length) === '|') {
+      // if last char is the cursor
+      currentText = text.substring(0, text.length - 1); // remove it
       textLength = textIdx - 1;
     }
 
     this.setState(
       {
-        text: currentText + fullText.slice(textLength, textLength + speed).join(''),
+        text:
+          currentText + fullText.slice(textLength, textLength + speed).join(''),
         textIdx: textLength + speed
       },
       scroll.scrollToBottom({ duration: 0 })
@@ -33,16 +35,18 @@ class HackerTyper extends React.Component {
     document.title = `Speed: ${speed}`;
   };
 
-  blinkCursor = e => { // blinking cursor
+  blinkCursor = e => {
+    // blinking cursor
     // eslint-disable-next-line
     const { text, fullText, textIdx } = this.state; // get console
     let currentText = text;
     let textLength = textIdx;
-		if(text.substring(text.length-1,text.length)==="|") { // if last char is the cursor
-      currentText = text.substring(0,text.length-1); // remove it
+    if (text.substring(text.length - 1, text.length) === '|') {
+      // if last char is the cursor
+      currentText = text.substring(0, text.length - 1); // remove it
       textLength = textIdx - 1;
     } else {
-      currentText = text + "|"; // else write it
+      currentText = text + '|'; // else write it
       textLength = textIdx + 1;
     }
     this.setState(
@@ -52,7 +56,7 @@ class HackerTyper extends React.Component {
       },
       scroll.scrollToBottom({ duration: 0 })
     );
-	}
+  };
 
   componentDidMount() {
     fetch(file)

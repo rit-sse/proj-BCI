@@ -4,6 +4,7 @@ import { powerByBand, epoch, fft } from '@neurosity/pipes';
 import Visualization from './Visualization';
 import HackerTyper from './HackerTyper';
 import FidgetSpinner from './FidgetSpinner';
+import FlappyBrick from './flappy-brick/FlappyBrick';
 import './App.css';
 
 class App extends Component {
@@ -109,7 +110,7 @@ class App extends Component {
   };
 
   renderFlappyBrick = _ => {
-    return <FlappyBrick yVelocity={this.getAverageAlpha()} />;
+    return <FlappyBrick yVelocity={this.getAverageGamma()} />;
   };
 
   renderDemoType = _ => {
@@ -158,10 +159,10 @@ class App extends Component {
             <div className="fidgetspinner">Fidget Spinner</div>
           </li>
           <li
-            className={`${demoType === 'othergame' ? 'active' : ''}`}
+            className={`${demoType === 'flappybrick' ? 'active' : ''}`}
             onClick={this.handleDemoTypeChange}
           >
-            <div className="othergame">Other Game</div>
+            <div className="flappybrick">Flappy Brick</div>
           </li>
           <li style={{ float: `right`, display: `flex` }}>
             <div onClick={this.subscribeToMuse} disabled={status}>
