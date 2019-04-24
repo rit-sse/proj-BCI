@@ -108,6 +108,10 @@ class App extends Component {
     return <FidgetSpinner data={data} speed={this.getAverageAlpha()} />;
   };
 
+  renderFlappyBrick = _ => {
+    return <FlappyBrick yVelocity={this.getAverageAlpha()} />;
+  };
+
   renderDemoType = _ => {
     const { demoType } = this.state;
     switch (demoType) {
@@ -115,6 +119,8 @@ class App extends Component {
         return this.renderHackerTyper();
       case 'fidgetspinner':
         return this.renderFidgetSpinner();
+      case 'flappybrick':
+        return this.renderFlappyBrick();
       default:
         return this.renderVisualization();
     }
