@@ -125,7 +125,7 @@ class App extends Component {
   };
 
   render() {
-    const { status, telemetry, demoType } = this.state;
+    const { status, telemetry } = this.state;
 
     const statusText = status ? 'Connected' : 'Disconnected';
     const batteryLevel = telemetry.batteryLevel || 0;
@@ -137,7 +137,7 @@ class App extends Component {
         </button>
         <div>Status: {statusText}</div>
         <p>Battery: {batteryLevel}%</p>
-        <Navbar brand={<a />} alignLinks="left">
+        <Navbar brand={<div></div>} alignlinks="left">
           <NavItem value="visualization" onClick={this.handleDemoTypeChange}>
             Visualization
           </NavItem>

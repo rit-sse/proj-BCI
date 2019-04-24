@@ -8088,7 +8088,7 @@ react-dev-utils@^8.0.0:
     strip-ansi "5.0.0"
     text-table "0.2.0"
 
-react-dom@^16.8.5, react-dom@^16.8.6:
+react-dom@^16.2.0, react-dom@^16.8.6:
   version "16.8.6"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.8.6.tgz#71d6303f631e8b0097f56165ef608f051ff6e10f"
   integrity sha512-1nL7PIq9LTL3fthPqwkvr2zY7phIPjYrT0jp4HjyEQrEROnw4dG41VVwi/wfoCneoleqrNX7iAD+pXebJZwrwA==
@@ -8113,14 +8113,14 @@ react-is@^16.8.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.8.4.tgz#90f336a68c3a29a096a3d648ab80e87ec61482a2"
   integrity sha512-PVadd+WaUDOAciICm/J1waJaSvgq+4rHE/K70j0PFqKhkTBsPv/82UGQJNXAngz1fOQLLxI6z1sEDmJDQhCTAA==
 
-react-materialize@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/react-materialize/-/react-materialize-3.1.0.tgz#1537000f4b70c15a113b8077e4cf8d3e018aa811"
-  integrity sha512-uAYyvkIYbVUyy9qc6LOpKs7g6zIWIU8upm3fILt4PScItriSgAofALyAHEV2A2t/towUXk21/DPMq9pnXmi7Ig==
+react-materialize@2.6.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/react-materialize/-/react-materialize-2.6.0.tgz#656c511599c547a879c9f97e87727b5376fdfaf2"
+  integrity sha512-bBxYogT/aX3WhBR9KJj6mhRTDIv3NFqnZbugShqjNC0cWc9BpeoCpLGxZ37/Rs2ca43IJBHapQIpZOUTQZM5ig==
   dependencies:
     classnames "^2.2.5"
-    react "^16.8.5"
-    react-dom "^16.8.5"
+    react "^16.2.0"
+    react-dom "^16.2.0"
 
 react-redux@6.0.1:
   version "6.0.1"
@@ -8196,7 +8196,7 @@ react-scroll@1.7.11:
     lodash.throttle "^4.1.1"
     prop-types "^15.5.8"
 
-react@^16.8.5, react@^16.8.6:
+react@^16.2.0, react@^16.8.6:
   version "16.8.6"
   resolved "https://registry.yarnpkg.com/react/-/react-16.8.6.tgz#ad6c3a9614fd3a4e9ef51117f54d888da01f2bbe"
   integrity sha512-pC0uMkhLaHm11ZSJULfOBqV4tIZkx87ZLvbbQYunNixAAvjnC+snJCg0XQXn9VIsttVsbZP/H/ewzgsd5fxKXw==
