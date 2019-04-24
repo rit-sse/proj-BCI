@@ -19,8 +19,10 @@ const pipeNorthImg = new Image();
 pipeNorthImg.src = pipeNorthPng;
 const pipeSouthImg = new Image();
 pipeSouthImg.src = pipeSouthPng;
-const verticalGap = 160;
+const verticalGap = 200;
 const horizontalGap = 75;
+const maxY = 20;
+const initialY = 100;
 const gravity = 1.5;
 let pipe = [];
 let constant = undefined;
@@ -34,7 +36,7 @@ class FlappyBrick extends React.Component {
 
   state = {
     bX: 10,
-    bY: 150
+    bY: initialY
   };
 
   onFlap = () => {
@@ -49,7 +51,7 @@ class FlappyBrick extends React.Component {
     const { bX, bY } = this.state;
     const canvas = this.canvasRef.current;
     this.rAF = requestAnimationFrame(this.updateAnimationState);
-    this.setState({ bY: bY + gravity });
+    this.setState({ bY: maxY + (this.props.yVelocity * 10) });
     for (let i = 0; i < pipe.length; i += 1) {
       constant = pipeNorthImg.height + verticalGap;
       pipe[i].x -= 1;
@@ -77,7 +79,7 @@ class FlappyBrick extends React.Component {
           }
         ];
 
-        this.setState({ bY: 150 });
+        this.setState({ bY: initialY });
       } else if (pipe[i].x === 5) {
         score += 1;
         this.onScore();

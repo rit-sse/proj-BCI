@@ -108,7 +108,7 @@ class App extends Component {
   };
 
   renderFlappyBrick = _ => {
-    return <FlappyBrick yVelocity={this.getAverageAlpha()} />;
+    return <FlappyBrick yVelocity={this.getAverageGamma()} />;
   };
 
   renderDemoType = _ => {
