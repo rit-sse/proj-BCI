@@ -4,13 +4,15 @@ import { powerByBand, epoch, fft } from '@neurosity/pipes';
 import Visualization from './Visualization';
 import HackerTyper from './HackerTyper';
 import FidgetSpinner from './FidgetSpinner';
+import './App.css';
 
 class App extends Component {
   state = {
     status: false,
     telemetry: {},
     data: {},
-    showVisualization: true
+    showVisualization: true,
+    demoType: 'visualization'
   };
 
   subscribeToMuse = async () => {
@@ -120,7 +122,7 @@ class App extends Component {
   };
 
   handleDemoTypeChange = e => {
-    this.setState({ demoType: e.target.value });
+    this.setState({ demoType: e.target.className });
   };
 
   render() {
@@ -131,17 +133,28 @@ class App extends Component {
 
     return (
       <div>
-        <button onClick={this.subscribeToMuse} disabled={status}>
-          Connect
-        </button>
-        <div>Status: {statusText}</div>
-        <p>Battery: {batteryLevel}%</p>
-        <select value={demoType} onChange={this.handleDemoTypeChange}>
-          <option value="visualization">Visualization</option>
-          <option value="hackertyper">Hacker Typer</option>
-          <option value="fidgetspinner">Fidget Spinner</option>
-        </select>
-        {this.renderDemoType()}
+        <ul>
+          <li className={`${demoType === 'visualization' ? 'active': ''}`} onClick={this.handleDemoTypeChange}>
+            <div className="visualization">Visualization</div>
+          </li>
+          <li className={`${demoType === 'hackertyper' ? 'active': ''}`} onClick={this.handleDemoTypeChange}>
+            <div className="hackertyper">Hacker Typer</div>
+          </li>
+          <li className={`${demoType === 'fidgetspinner' ? 'active': ''}`} onClick={this.handleDemoTypeChange}>
+            <div className="fidgetspinner">Fidget Spinner</div>
+          </li>
+          <li className={`${demoType === 'othergame' ? 'active': ''}`} onClick={this.handleDemoTypeChange}>
+            <div className="othergame">Other Game</div>
+          </li>
+          <li style={{float: `right`, display: `flex`}}>
+            <div onClick={this.subscribeToMuse} disabled={status}>Connect</div>
+            <div style={{color: `white`}}>Battery: {batteryLevel}%</div>
+            <div>Status: {statusText}</div>
+          </li>
+        </ul>
+        <div style={{paddingTop: `70px`}}>
+          {this.renderDemoType()}
+        </div>
       </div>
     );
   }
