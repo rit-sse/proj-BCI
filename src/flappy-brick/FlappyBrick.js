@@ -1,6 +1,6 @@
 import React from 'react';
 import bgPng from './bg.png';
-import birdPng from './rickyt.png';
+import brickPng from './ricky.png';
 import fgPng from './fg.png';
 import pipeNorthPng from './pipeNorth.png';
 import pipeSouthPng from './pipeSouth.png';
@@ -11,15 +11,15 @@ const flyAudio = new Audio(flyMp3);
 const scoreAudio = new Audio(scoreMp3);
 const bgImg = new Image();
 bgImg.src = bgPng;
-const birdImg = new Image();
-birdImg.src = birdPng;
+const brickImg = new Image();
+brickImg.src = brickPng;
 const fgImg = new Image();
 fgImg.src = fgPng;
 const pipeNorthImg = new Image();
 pipeNorthImg.src = pipeNorthPng;
 const pipeSouthImg = new Image();
 pipeSouthImg.src = pipeSouthPng;
-const verticalGap = 200;
+const verticalGap = 240;
 const horizontalGap = 75;
 const maxY = 20;
 const initialY = 100;
@@ -65,16 +65,16 @@ class FlappyBrick extends React.Component {
       }
 
       if (
-        (bX + birdImg.width >= pipe[i].x &&
+        (bX + brickImg.width >= pipe[i].x &&
           bX <= pipe[i].x + pipeNorthImg.width &&
           (bY <= pipe[i].y + pipeNorthImg.height ||
-            bY + birdImg.height >= pipe[i].y + constant)) ||
-        bY + birdImg.height >= canvas.height
+            bY + brickImg.height >= pipe[i].y + constant)) ||
+        bY + brickImg.height >= canvas.height // - fgImg.height
       ) {
         score = 0;
         pipe = [
           {
-            x: this.canvasRef.current.width,
+            x: canvas.width,
             y: 0
           }
         ];
@@ -98,15 +98,17 @@ class FlappyBrick extends React.Component {
     context.drawImage(bgImg, 0, 0);
     this.rAF = requestAnimationFrame(this.updateAnimationState);
     pipe[0] = {
-      x: this.canvasRef.current.width,
+      x: canvas.width,
       y: 0
     };
     document.addEventListener('keydown', this.moveUp, false);
+    document.addEventListener('click', this.moveUp, false);
   }
 
   componentWillUnmount() {
     cancelAnimationFrame(this.rAF);
     document.removeEventListener('keydown', this.moveUp, false);
+    document.removeEventListener('click', this.moveUp, false);
   }
 
   componentDidUpdate() {
@@ -123,7 +125,7 @@ class FlappyBrick extends React.Component {
       ctx.drawImage(pipeNorthImg, pipe[i].x, pipe[i].y);
       ctx.drawImage(pipeSouthImg, pipe[i].x, pipe[i].y + constant);
     }
-    ctx.drawImage(birdImg, bX, bY);
+    ctx.drawImage(brickImg, bX, bY);
     ctx.fillStyle = '#000';
     ctx.font = '20px Verdana';
     ctx.fillText('Score : ' + score, 10, canvas.height - 20);
