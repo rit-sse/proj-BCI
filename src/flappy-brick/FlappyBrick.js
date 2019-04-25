@@ -19,10 +19,9 @@ const pipeNorthImg = new Image();
 pipeNorthImg.src = pipeNorthPng;
 const pipeSouthImg = new Image();
 pipeSouthImg.src = pipeSouthPng;
-const verticalGap = 200;
+const verticalGap = 240;
 const horizontalGap = 75;
-const maxY = 20;
-const initialY = 100;
+const initialY = 200;
 let pipe = [];
 let constant = undefined;
 let score = 0;
@@ -48,9 +47,10 @@ class FlappyBrick extends React.Component {
 
   updateAnimationState = () => {
     const { bX, bY } = this.state;
+    const { speed } = this.props;
     const canvas = this.canvasRef.current;
     this.rAF = requestAnimationFrame(this.updateAnimationState);
-    this.setState({ bY: maxY + this.props.yVelocity * 10 });
+    this.setState({ bY: bY + 2 - speed });
     for (let i = 0; i < pipe.length; i += 1) {
       constant = pipeNorthImg.height + verticalGap;
       pipe[i].x -= 1;
@@ -68,7 +68,7 @@ class FlappyBrick extends React.Component {
           bX <= pipe[i].x + pipeNorthImg.width &&
           (bY <= pipe[i].y + pipeNorthImg.height ||
             bY + brickImg.height >= pipe[i].y + constant)) ||
-        bY + brickImg.height >= canvas.height // - fgImg.height
+        bY + brickImg.height >= canvas.height
       ) {
         score = 0;
         pipe = [
@@ -116,6 +116,7 @@ class FlappyBrick extends React.Component {
     const ctx = canvas.getContext('2d');
     const width = canvas.width;
     const height = canvas.height;
+    document.title = `Speed: ${this.props.speed}`;
     ctx.save();
     ctx.clearRect(0, 0, width, height);
     ctx.drawImage(bgImg, 0, 0);

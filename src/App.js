@@ -47,7 +47,7 @@ class App extends Component {
 
     if (data.gamma) {
       const focus = data.gamma.reduce((sum, x) => sum + x) / data.gamma.length;
-      return 5 - focus > 0 ? 5 - focus : 0;
+      return focus;
     }
 
     return 0;
@@ -110,7 +110,7 @@ class App extends Component {
   };
 
   renderFlappyBrick = _ => {
-    return <FlappyBrick yVelocity={this.getAverageGamma()} />;
+    return <FlappyBrick speed={this.getAverageGamma()} />;
   };
 
   renderDemoType = _ => {
