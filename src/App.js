@@ -45,9 +45,8 @@ class App extends Component {
     const { data } = this.state;
 
     if (data.gamma) {
-      const focus = data.gamma.reduce((sum, x) => sum + x) / data.gamma.length
+      const focus = data.gamma.reduce((sum, x) => sum + x) / data.gamma.length;
       return 5 - focus > 0 ? 5 - focus : 0;
-
     }
 
     return 0;
@@ -134,27 +133,39 @@ class App extends Component {
     return (
       <div>
         <ul>
-          <li className={`${demoType === 'visualization' ? 'active': ''}`} onClick={this.handleDemoTypeChange}>
+          <li
+            className={`${demoType === 'visualization' ? 'active' : ''}`}
+            onClick={this.handleDemoTypeChange}
+          >
             <div className="visualization">Visualization</div>
           </li>
-          <li className={`${demoType === 'hackertyper' ? 'active': ''}`} onClick={this.handleDemoTypeChange}>
+          <li
+            className={`${demoType === 'hackertyper' ? 'active' : ''}`}
+            onClick={this.handleDemoTypeChange}
+          >
             <div className="hackertyper">Hacker Typer</div>
           </li>
-          <li className={`${demoType === 'fidgetspinner' ? 'active': ''}`} onClick={this.handleDemoTypeChange}>
+          <li
+            className={`${demoType === 'fidgetspinner' ? 'active' : ''}`}
+            onClick={this.handleDemoTypeChange}
+          >
             <div className="fidgetspinner">Fidget Spinner</div>
           </li>
-          <li className={`${demoType === 'othergame' ? 'active': ''}`} onClick={this.handleDemoTypeChange}>
+          <li
+            className={`${demoType === 'othergame' ? 'active' : ''}`}
+            onClick={this.handleDemoTypeChange}
+          >
             <div className="othergame">Other Game</div>
           </li>
-          <li style={{float: `right`, display: `flex`}}>
-            <div onClick={this.subscribeToMuse} disabled={status}>Connect</div>
-            <div style={{color: `white`}}>Battery: {batteryLevel}%</div>
+          <li style={{ float: `right`, display: `flex` }}>
+            <div onClick={this.subscribeToMuse} disabled={status}>
+              Connect
+            </div>
+            <div style={{ color: `white` }}>Battery: {batteryLevel}%</div>
             <div>Status: {statusText}</div>
           </li>
         </ul>
-        <div style={{paddingTop: `70px`}}>
-          {this.renderDemoType()}
-        </div>
+        <div style={{ paddingTop: `70px` }}>{this.renderDemoType()}</div>
       </div>
     );
   }
