@@ -5,6 +5,7 @@ import Visualization from './Visualization';
 import HackerTyper from './HackerTyper';
 import FidgetSpinner from './FidgetSpinner';
 import FlappyBrick from './flappy-brick/FlappyBrick';
+import Dino from './dino/Dino';
 import './App.css';
 
 class App extends Component {
@@ -110,7 +111,14 @@ class App extends Component {
   };
 
   renderFlappyBrick = _ => {
-    return <FlappyBrick speed={this.getAverageGamma()} />;
+    document.body.style = 'background: white;';
+    return <FlappyBrick yVelocity={this.getAverageGamma()} />;
+  };
+
+  renderDino = _ => {
+    const { data } = this.state;
+    document.body.style = 'background: black;';
+    return <Dino data={data} speed={this.getAverageGamma()} />;
   };
 
   renderDemoType = _ => {
@@ -122,6 +130,8 @@ class App extends Component {
         return this.renderFidgetSpinner();
       case 'flappybrick':
         return this.renderFlappyBrick();
+      case 'dino':
+        return this.renderDino();
       default:
         return this.renderVisualization();
     }
@@ -163,6 +173,12 @@ class App extends Component {
             onClick={this.handleDemoTypeChange}
           >
             <div className="flappybrick">Flappy Brick</div>
+          </li>
+          <li
+            className={`${demoType === 'dino' ? 'active' : ''}`}
+            onClick={this.handleDemoTypeChange}
+          >
+            <div className="dino">Dino</div>
           </li>
           <li style={{ float: `right`, display: `flex` }}>
             <div onClick={this.subscribeToMuse} disabled={status}>
