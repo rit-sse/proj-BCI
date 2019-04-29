@@ -1,8 +1,9 @@
 import React from 'react';
-import styled, { css, keyframes } from 'styled-components'
+import styled, { css, keyframes } from 'styled-components';
 import c1 from './chow.jpg';
-import c2 from './kiser2.jpg'
-import rd from './road.jpg'
+import c2 from './kiser2.jpg';
+import rd from './road.jpg';
+
 const movement = keyframes`
   from {
     transform: translateX(0);
@@ -14,7 +15,7 @@ const movement = keyframes`
 `;
 
 const animation = props =>
-    css`
+  css`
     ${movement} ${props.speed}s linear infinite;
   `;
 
@@ -32,7 +33,6 @@ const Kachow = styled.img`
   width: 300px;
 `;
 
-
 const RaceTrack = styled.div`
   display: flex;
   background-image: url(${rd});
@@ -42,20 +42,17 @@ const RaceTrack = styled.div`
   height: 720px;
 `;
 
-class Race extends React.Component{
-
-    constructor(props){
-        super(props);
-    };
-
-    render(){
-        return(
-            <RaceTrack>
-                <Translate speed = {this.props.speed}> <Kachow src={c1}/> </Translate>
-                <Translate speed = {20}> <Kachow src={c2} /> </Translate>
-            </RaceTrack>
-        )
-    };
+function Race(props) {
+  return (
+    <RaceTrack>
+      <Translate speed={props.speed}>
+        <Kachow src={c1} />
+      </Translate>
+      <Translate speed={20}>
+        <Kachow src={c2} />
+      </Translate>
+    </RaceTrack>
+  );
 }
 
 export default Race;
