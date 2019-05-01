@@ -22,7 +22,8 @@ pipeSouthImg.src = pipeSouthPng;
 const verticalGap = 200;
 const horizontalGap = 75;
 const maxY = 20;
-const initialY = 100;
+const initialY = 200;
+const floorHeight = 280;
 let pipe = [];
 let constant = undefined;
 let score = 0;
@@ -50,7 +51,7 @@ class Dino extends React.Component {
     const { bX, bY } = this.state;
     const canvas = this.canvasRef.current;
     this.rAF = requestAnimationFrame(this.updateAnimationState);
-    this.setState({ bY: maxY + this.props.yVelocity * 10 });
+    this.setState({ bY: bY }); //maxY + this.props.yVelocity * 10 
     for (let i = 0; i < pipe.length; i += 1) {
       constant = pipeNorthImg.height + verticalGap;
       pipe[i].x -= 1;
@@ -68,7 +69,7 @@ class Dino extends React.Component {
           bX <= pipe[i].x + pipeNorthImg.width &&
           (bY <= pipe[i].y + pipeNorthImg.height ||
             bY + brickImg.height >= pipe[i].y + constant)) ||
-        bY + brickImg.height >= canvas.height // - fgImg.height
+              bY + brickImg.height >= canvas.height // - fgImg.height
       ) {
         score = 0;
         pipe = [
@@ -87,14 +88,14 @@ class Dino extends React.Component {
   };
 
   moveUp = () => {
-    this.setState({ bY: this.state.bY - 25 });
+    this.setState({ bY: this.state.bY }); // - 25
     this.onFlap();
   };
 
   componentDidMount() {
     const canvas = this.canvasRef.current;
     const context = canvas.getContext('2d');
-    context.drawImage(bgImg, 0, 0);
+    context.drawImage(bgImg, 0, floorHeight);
     this.rAF = requestAnimationFrame(this.updateAnimationState);
     pipe[0] = {
       x: canvas.width,
@@ -118,7 +119,7 @@ class Dino extends React.Component {
     const height = canvas.height;
     ctx.save();
     ctx.clearRect(0, 0, width, height);
-    ctx.drawImage(bgImg, 0, 0);
+    ctx.drawImage(bgImg, 0, floorHeight);
     ctx.drawImage(fgImg, 0, height - fgImg.height);
     for (let i = 0; i < pipe.length; i += 1) {
       ctx.drawImage(pipeNorthImg, pipe[i].x, pipe[i].y);

@@ -117,7 +117,7 @@ class App extends Component {
 
   renderDino = _ => {
     const { data } = this.state;
-    document.body.style = 'background: black;';
+    document.body.style = 'background: white;';
     return <Dino data={data} speed={this.getAverageGamma()} />;
   };
 
