@@ -5,6 +5,7 @@ import Visualization from './Visualization';
 import HackerTyper from './HackerTyper';
 import FidgetSpinner from './FidgetSpinner';
 import FlappyBrick from './flappy-brick/FlappyBrick';
+import Race from './Race';
 import './App.css';
 
 class App extends Component {
@@ -113,6 +114,12 @@ class App extends Component {
     return <FlappyBrick speed={this.getAverageGamma()} />;
   };
 
+  renderRace = _ => {
+    const { data } = this.state;
+    document.body.style = 'background: white;';
+    return <Race data={data} speed={this.getAverageAlpha()} />;
+  };
+
   renderDemoType = _ => {
     const { demoType } = this.state;
     switch (demoType) {
@@ -122,6 +129,8 @@ class App extends Component {
         return this.renderFidgetSpinner();
       case 'flappybrick':
         return this.renderFlappyBrick();
+      case 'race':
+        return this.renderRace();
       default:
         return this.renderVisualization();
     }
@@ -163,6 +172,12 @@ class App extends Component {
             onClick={this.handleDemoTypeChange}
           >
             <div className="flappybrick">Flappy Brick</div>
+          </li>
+          <li
+            className={`${demoType === 'race' ? 'active' : ''}`}
+            onClick={this.handleDemoTypeChange}
+          >
+            <div className="race">Race</div>
           </li>
           <li style={{ float: `right`, display: `flex` }}>
             <div onClick={this.subscribeToMuse} disabled={status}>
