@@ -1,5 +1,5 @@
 import React from 'react';
-import { Bar } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 import 'chartjs-plugin-datalabels';
 
 const chartSize = {
@@ -22,7 +22,7 @@ const chartOptions = {
 function Visualization(props) {
   return (
     <React.Fragment>
-      <Bar
+      <Line
         data={{
           labels: props.labels,
           datasets: [
