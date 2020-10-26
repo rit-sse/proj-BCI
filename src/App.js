@@ -6,6 +6,7 @@ import HackerTyper from './HackerTyper';
 import FidgetSpinner from './FidgetSpinner';
 import FlappyBrick from './flappy-brick/FlappyBrick';
 import './App.css';
+import Calibration from './Calibration';
 
 class App extends Component {
   state = {
@@ -13,7 +14,8 @@ class App extends Component {
     telemetry: {},
     data: {},
     showVisualization: true,
-    demoType: 'visualization'
+    demoType: 'visualization',
+    calibrating: false
   };
 
   subscribeToMuse = async () => {
@@ -63,36 +65,60 @@ class App extends Component {
     return 0;
   };
 
+  getAverage = wavelength => {
+    const {data} = this.state;
+
+    if (data[wavelength]){
+      return 1 / (data[wavelength].reduce((sum, x) => sum + x) / data[wavelength.length]) 
+    }
+  } 
+
+  setBounds = bounds =>{
+    this.setState({...bounds});
+  }
+
   renderVisualization = _ => {
     const { data } = this.state;
     document.body.style = 'background: white; color: black;';
+    const avgAllData = {
+      Alpha: this.getAverage("Alpha"),
+      Beta: this.getAverage("Beta"),
+      Delta: this.getAverage("Delta"),
+      Gamma: this.getAverage("Gamma"),
+      Theta: this.getAverage("Theta"),
+    }
     return (
-      <div style={{ display: 'flex' }}>
-        <Visualization
-          data={data.gamma}
-          labels={['Gamma']}
-          backgroundColor="#BDD6EA"
-        />
-        <Visualization
-          data={data.beta}
-          labels={['Beta']}
-          backgroundColor="#B4C493"
-        />
-        <Visualization
-          data={data.alpha}
-          labels={['Alpha']}
-          backgroundColor="#F1C387"
-        />
-        <Visualization
-          data={data.theta}
-          labels={['Theta']}
-          backgroundColor="#EFB180"
-        />
-        <Visualization
-          data={data.delta}
-          labels={['Delta']}
-          backgroundColor="#E19271"
-        />
+      <div>
+        <div style={{display: 'flex'}}>
+          <Calibration calibrating={this.state.calibrating} setBounds={this.setBounds} readings={avgAllData}/>
+        </div>
+        <div style={{ display: 'flex' }}>
+          <Visualization
+            data={data.gamma}
+            labels={['Gamma']}
+            backgroundColor="#BDD6EA"
+          />
+          <Visualization
+            data={data.beta}
+            labels={['Beta']}
+            backgroundColor="#B4C493"
+          />
+          <Visualization
+            data={data.alpha}
+            labels={['Alpha']}
+            backgroundColor="#F1C387"
+          />
+          <Visualization
+            data={data.theta}
+            labels={['Theta']}
+            backgroundColor="#EFB180"
+          />
+          <Visualization
+            data={data.delta}
+            labels={['Delta']}
+            backgroundColor="#E19271"
+          />
+        </div>
       </div>
     );
   };
